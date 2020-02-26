@@ -62,6 +62,7 @@ func (u *UDPServer) Serve() {
 			select {
 			case <-u.done:
 				log.Println("shutting down...")
+				u.conn.Close()
 				return
 			default:
 			}
@@ -72,5 +73,4 @@ func (u *UDPServer) Serve() {
 // Close closes the connection.
 func (u *UDPServer) Close() {
 	u.done <- true
-	u.conn.Close()
 }
